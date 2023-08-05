@@ -36,5 +36,5 @@ class NoterPlugin(object):
         fullPath = self.nvim.current.buffer.name
         splitPath = fullPath.split(os.sep)
         fileName = splitPath[-1]
-        filePath = splitPath[0:-1].join(os.sep)
+        filePath = os.sep.join(splitPath[0:-1])
         self.nvim.out_write(f"Current file '{fileName}' in '{filePath}'\n")
