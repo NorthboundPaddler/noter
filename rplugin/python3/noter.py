@@ -52,15 +52,14 @@ class NoterPlugin(object):
         # add a record to the directory's Noter DB
         # TODO Check if file already exists before adding it
         exists = self.checkFile()
-        if exists is True:
-
+        if exists is False:
             # Add record to DB using file name and path
             fileName, filePath = self.getFileMetadata()
             con = sqlite3.connect(dbPath)
             result = con.execute(
                 f'INSERT INTO notes (name, path) VALUES ("{fileName}", "{filePath}")')
             con.commit()
-            self.nvim.out_write(f"checkFile returned {exists}, and Current file added to noter.db\n")
+            self.nvim.out_write("Current file added to noter.db\n")
             return result
         else:
             raise Exception("This file already exists in noter.db")
