@@ -68,6 +68,7 @@ class NoterPlugin(object):
     def checkFile(self):
         # Get file metadata of the current buffer and
         # check the Noter DB for an existing record
+        # also quickly check for if the DB exists
         fileName, filePath = self.getFileMetadata()
         con = sqlite3.connect(dbPath)
         countStatement = f'SELECT COUNT(*) FROM notes WHERE name="{fileName}" AND path="{filePath}"'
@@ -79,7 +80,12 @@ class NoterPlugin(object):
         else:
             return True
 
+    def checkForDatabase(self):
+        # Check if the database exists
+        return os.path.exists(dbPath)
+
     @pynvim.autocmd("BufWritePost", pattern="*.md")
     def addFileOnWrite(self):
-        self.addFile()
+        if self.checkForDatabase():
+            self.addFile()
         return
