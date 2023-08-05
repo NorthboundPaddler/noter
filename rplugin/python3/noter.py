@@ -71,7 +71,7 @@ class NoterPlugin(object):
         result = con.execute(countStatement)
         count = result.fetchone()[0]
         self.nvim.out_write(f'{countStatement} | returns {count} records\n')
-        if count == 0:
+        if int(count) == 0:
             return False
         else:
             return True
