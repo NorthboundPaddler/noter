@@ -79,12 +79,7 @@ class NoterPlugin(object):
         else:
             return True
 
-    @pynvim.autocmd("BufRead", pattern="*.md")
-    def addFileOnRead(self):
-        self.addFile()
-        return
-
-    @pynvim.autocmd("BufNewFile", pattern="*.md")
-    def addFileOnCreate(self):
+    @pynvim.autocmd("BufWritePost", pattern="*.md")
+    def addFileOnWrite(self):
         self.addFile()
         return
