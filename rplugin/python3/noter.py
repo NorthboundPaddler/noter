@@ -26,7 +26,13 @@ class NoterPlugin(object):
             raise Exception("The DB has already been created")
         con = sqlite3.connect(dbPath)
         cur = con.cursor()
-        cur.execute("CREATE TABLE notes(name TEXT, path TEXT)")
+        createStr = '''CREATE TABLE "notes" (
+                "id"	INTEGER NOT NULL UNIQUE,
+                "name"	TEXT NOT NULL,
+                "path"	TEXT NOT NULL,
+                PRIMARY KEY("id" AUTOINCREMENT)
+                );'''
+        cur.execute(createStr)
         self.nvim.out_write("Created database\n")
 
     @pynvim.command("NoterGetFileMetadata")
