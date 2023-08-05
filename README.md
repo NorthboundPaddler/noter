@@ -6,7 +6,7 @@
 ## Quickstart
 First, you need to initialize a database.
 
-```:exec NoterBuildDB```
+```:exec NoterBuildDB()```
 
 ## Troubleshooting
 To get the most recent plugin updates, you can `:PackerUpdate` and then `:UpdateRemotePlugins`. This should give you access to new commands, otherwise it might be necessary to restart Neovim. 
