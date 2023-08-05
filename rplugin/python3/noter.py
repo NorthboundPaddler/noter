@@ -28,3 +28,10 @@ class NoterPlugin(object):
         cur = con.cursor()
         cur.execute("CREATE TABLE notes(id INT, name TEXT, path TEXT)")
         self.nvim.out_write("Created database\n")
+
+    @pynvim.command("NoterGetFileMetadata")
+    def getFileMetadata(self):
+        # Get the filename and path from the current buffer
+        # Potentially turn this into the "Add new file to DB" function
+        name = self.nvim.current.buffer.name
+        self.nvim.out_write(f"Current buffer name: {name}\n")
