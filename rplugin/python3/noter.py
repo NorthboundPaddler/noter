@@ -62,7 +62,7 @@ class NoterPlugin(object):
             self.nvim.out_write("Current file added to noter.db\n")
             return result
         else:
-            raise Exception("This file already exists in noter.db")
+            self.nvim.out_write("Current file already exists in noter.db\n")
 
     @pynvim.command("NoterCheckFile")
     def checkFile(self):
@@ -78,3 +78,8 @@ class NoterPlugin(object):
             return False
         else:
             return True
+
+    @pynvim.autocmd("BufRead", pattern="*.md")
+    def addFileOnOpen(self):
+        self.addFile()
+        return
