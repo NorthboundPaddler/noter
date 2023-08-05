@@ -50,7 +50,7 @@ class NoterPlugin(object):
     def addFile(self):
         # Get file metadata of the current buffer and
         # add a record to the directory's Noter DB
-        # TODO Check if file already exists before adding it
+        # if the file doesn't already exist
         exists = self.checkFile()
         if exists is False:
             # Add record to DB using file name and path
