@@ -26,6 +26,6 @@ class NoterPlugin(object):
             raise Exception("The DB has already been created")
         con = sqlite3.connect(dbPath)
         cur = con.cursor()
-        cur.execute("CREATE TABLE notes(id, name, path)")
+        cur.execute("CREATE TABLE notes(id INT, name TEXT, path TEXT")
 
         return
