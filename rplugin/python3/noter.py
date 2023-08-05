@@ -33,5 +33,8 @@ class NoterPlugin(object):
     def getFileMetadata(self):
         # Get the filename and path from the current buffer
         # Potentially turn this into the "Add new file to DB" function
-        name = self.nvim.current.buffer.name
-        self.nvim.out_write(f"Current buffer name: {name}\n")
+        fullPath = self.nvim.current.buffer.name
+        splitPath = fullPath.split(os.sep)
+        fileName = splitPath[-1]
+        filePath = splitPath[0:-1].join(os.sep)
+        self.nvim.out_write(f"Current file '{fileName}' in '{filePath}'\n")
