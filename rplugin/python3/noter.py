@@ -26,7 +26,7 @@ class NoterPlugin(object):
             raise Exception("The DB has already been created")
         con = sqlite3.connect(dbPath)
         cur = con.cursor()
-        cur.execute("CREATE TABLE notes(id INT, name TEXT, path TEXT)")
+        cur.execute("CREATE TABLE notes(name TEXT, path TEXT)")
         self.nvim.out_write("Created database\n")
 
     @pynvim.command("NoterGetFileMetadata")
@@ -38,3 +38,17 @@ class NoterPlugin(object):
         fileName = splitPath[-1]
         filePath = os.sep.join(splitPath[0:-1])
         self.nvim.out_write(f"Current file '{fileName}' in '{filePath}'\n")
+        return (fileName, filePath)
+
+    @pynvim.command("NoterAddFile")
+    def addFile(self):
+        # Get file metadata of the current buffer and
+        # add a record to the directory's Noter DB
+        # TODO Check if file already exists before adding it
+        fileName, filePath = self.getFileMetadata()
+        con = sqlite3.connect(dbPath)
+        result = con.execute(
+            f'INSERT INTO notes (name, path) VALUES ("{fileName}", "{filePath}")')
+        con.commit()
+        self.nvim.out_write("Current file added to noter.db\n")
+        return result
