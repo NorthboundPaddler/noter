@@ -61,6 +61,7 @@ class NoterPlugin(object):
         self.nvim.out_write("Current file added to noter.db\n")
         return result
 
+    @pynvim.command("NoterCheckFile")
     def checkFile(self):
         # Get file metadata of the current buffer and
         # check the Noter DB for an existing record
@@ -68,7 +69,7 @@ class NoterPlugin(object):
         con = sqlite3.connect(dbPath)
         countStatement = f'SELECT COUNT(*) FROM notes WHERE name="{fileName}" AND path="{filePath}"'
         self.nvim.out_write(f'{countStatement}\n')
-        result = con.execute(countStatement) 
+        result = con.execute(countStatement)
         count = result.fetchone()[0]
         if count == 0:
             return False
