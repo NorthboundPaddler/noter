@@ -67,8 +67,8 @@ class NoterPlugin(object):
         fileName, filePath = self.getFileMetadata()
         con = sqlite3.connect(dbPath)
         result = con.execute(
-            f'SELECT id FROM notes WHERE name="{fileName}" AND path="{filePath}"')
-        records = result.fetchall()
-        if len(records) > 0:
-            return True
-        return False
+            f'SELECT COUNT(*) FROM notes WHERE name="{fileName}" AND path="{filePath}"')
+        count = result.fetchone()[0]
+        if count == 0:
+            return False
+        return True
