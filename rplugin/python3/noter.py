@@ -68,9 +68,10 @@ class NoterPlugin(object):
         fileName, filePath = self.getFileMetadata()
         con = sqlite3.connect(dbPath)
         countStatement = f'SELECT COUNT(*) FROM notes WHERE name="{fileName}" AND path="{filePath}"'
-        self.nvim.out_write(f'{countStatement}\n')
         result = con.execute(countStatement)
         count = result.fetchone()[0]
+        self.nvim.out_write(f'{countStatement} | returns {count} records\n')
         if count == 0:
             return False
-        return True
+        else:
+            return True
