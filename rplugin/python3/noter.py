@@ -15,7 +15,7 @@ class NoterPlugin(object):
     @pynvim.function("TestNoter")
     def testNoter(self, args):
         # Quick test to output to nvim console
-        return "Noter Plugin operational"
+        self.nvim.out_write("Noter Plugin operational")
 
     @pynvim.function("NoterBuildDB")
     def buildDB(self, args):
@@ -27,5 +27,4 @@ class NoterPlugin(object):
         con = sqlite3.connect(dbPath)
         cur = con.cursor()
         cur.execute("CREATE TABLE notes(id INT, name TEXT, path TEXT)")
-
-        return
+        self.nvim.out_write("Created database")
