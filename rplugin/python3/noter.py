@@ -12,7 +12,7 @@ class NoterPlugin(object):
     def __init__(self, nvim):
         self.nvim = nvim
 
-    @pynvim.function("TestNoter")
+    @pynvim.command("TestNoter")
     def testNoter(self, args):
         # Quick test to output to nvim console
         self.nvim.out_write("Noter Plugin operational\n")
