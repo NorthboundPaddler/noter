@@ -13,12 +13,12 @@ class NoterPlugin(object):
         self.nvim = nvim
 
     @pynvim.function("TestNoter")
-    def testNoter(self):
+    def testNoter(self, args):
         # Quick test to output to nvim console
         return "Noter Plugin operational"
 
     @pynvim.function("NoterBuildDB")
-    def buildDB(self):
+    def buildDB(self, args):
         # Check for an existing SQLite DB
         # Create one if it is missing
         # otherwise flash the user with an err
